@@ -16,7 +16,10 @@ tokenLines.forEach(line => {
     if (line === '') return;
     const [token, channelId] = line.split(':');
     const client = new Client({
-        intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildVoiceStates],
+        intents: [
+            GatewayIntentBits.Guilds,
+            GatewayIntentBits.GuildVoiceStates,
+        ],
     });
 
     client.once(Events.ClientReady, async (client) => {
@@ -32,18 +35,29 @@ tokenLines.forEach(line => {
             console.log('\x1b[32m', "---------------------------------------");
             const channel = client.channels.cache.get(channelId);
 
-            if (channel) {
-                joinVoiceChannel({
-                    selfDeaf: true,
-                    selfMute: true,
-                    group: client.user.id,
-                    channelId: channel.id,
-                    guildId: channel.guild.id,
-                    adapterCreator: channel.guild.voiceAdapterCreator,
-                });
-            } else {
-                console.log('\x1b[31m', "[-] Kanal Bulunamadı");
-            }
+            const connectToChannel = () => {
+                if (channel) {
+                    joinVoiceChannel({
+                        selfDeaf: true,
+                        selfMute: true,
+                        group: client.user.id,
+                        channelId: channel.id,
+                        guildId: channel.guild.id,
+                        adapterCreator: channel.guild.voiceAdapterCreator,
+                    });
+                } else {
+                    console.log('\x1b[31m', "[-] Kanal Bulunamadı");
+                }
+            };
+
+            connectToChannel();
+
+            client.on(Events.VoiceStateUpdate, (oldState, newState) => {
+                if (oldState.id === client.user.id && oldState.channelId && !newState.channelId) {
+                    console.log('\x1b[31m', "[!] Bot sesten çıkarıldı, yeniden bağlanıyor...");
+                    setTimeout(connectToChannel, 5000); // 5 saniye sonra tekrar bağlan
+                }
+            });
         } catch (error) {
             console.log('\x1b[31m', "[API] APİ BAKIMDA veya erişilemiyor");
             console.error(error);
