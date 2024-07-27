@@ -3,7 +3,7 @@
 Bu proje, **Swoxycxn** tarafından geliştirilmiştir. Herhangi bir yerde benim diye paylaşılır veya satılır ise MIT License üzerinden işlem görecektir.
 
 <a href="https://cdn.discordapp.com/attachments/1246963243738464406/1261303965098704908/image.png?ex=6692785b&is=669126db&hm=5097d7d9de527e6959bdbdc4d2635c2c469b82ae626c7a30f5e423d691f61ffb&">
-  <img src="https://cdn.discordapp.com/attachments/1246963243738464406/1261303965098704908/image.png?ex=6692785b&is=669126db&hm=5097d7d9de527e6959bdbdc4d2635c2c469b82ae626c7a30f5e423d691f61ffb&" alt="Proje Görseli" width="400"/>
+  <img src="https://raw.githubusercontent.com/swoxycan/voice-joiner/main/proje.png" alt="Proje Görseli" width="400"/>
 </a>
 
 ## Özellikler
